@@ -4,6 +4,10 @@ import { NextResponse } from "next/server";
 export default withEdgeMiddlewareAuth((request) => {
   const { sessionId, userId } = request.auth;
 
+  console.log("request", request);
+  console.log("request.auth", request.auth);
+  console.log("sessionId", sessionId);
+
   if (!sessionId) {
     const destination = request.nextUrl.href;
     const url = request.nextUrl.clone();

@@ -1,6 +1,6 @@
 {
-  "name": "clerk-nextjs-starter",
-  "description": "Use Clerk's authentication and user management with Next.js",
+  "name": "foldermark",
+  "description": "markdown from a folder or files",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,7 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@clerk/nextjs": "^3.6.0",
+    "@clerk/nextjs": "^3.6.4",
     "next": "^12.1.2",
     "react": "17.0.2",
     "react-dom": "17.0.2"
