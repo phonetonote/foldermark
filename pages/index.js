@@ -3,9 +3,19 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-import { withServerSideAuth } from "@clerk/nextjs/ssr";
+import Dropbox from "../components/Dropbox";
 
-export const getServerSideProps = withServerSideAuth();
+const DropBox = () => {
+  console.log("DropBox");
+
+  return (
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
+        <h3>Dropbox</h3>
+      </div>
+    </div>
+  );
+};
 
 const SignupLink = () => (
   <Link href="/sign-up">
@@ -22,13 +32,22 @@ const SignupLink = () => (
   </Link>
 );
 
+// Main component using <SignedIn> & <SignedOut>.
+//
+// The SignedIn and SignedOut components are used to control rendering depending
+// on whether or not a visitor is signed in.
+//
+// https://docs.clerk.dev/frontend/react/signedin-and-signedout
 const Main = () => (
   <main className={styles.main}>
     <h1 className={styles.title}>foldermark</h1>
 
     <div className={styles.cards}>
       <SignedIn>
-        <div className={styles.card}>{/* if dropbox connected... */}</div>
+        <div className={styles.card}>
+          <h2>getting started</h2>
+          <Dropbox />
+        </div>
       </SignedIn>
 
       <SignedOut>
@@ -40,6 +59,7 @@ const Main = () => (
   </main>
 );
 
+// Footer component
 const Footer = () => (
   <footer className={styles.footer}>
     Powered by{" "}
@@ -56,7 +76,7 @@ const Footer = () => (
 const Home = () => (
   <div className={styles.container}>
     <Head>
-      <title>Create Next App</title>
+      <title>foldermark</title>
       <link rel="icon" href="/favicon.ico" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
     </Head>
