@@ -1,3 +1,3 @@
-# folderMark
+## foldermark
 
-point this to a folder of files, get back a markdown list.
+visit [https://foldermark.vercel.app/](https://foldermark.vercel.app/) to get started. more options and configuration will be available soon.
