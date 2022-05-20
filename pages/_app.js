@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
@@ -6,6 +5,7 @@ import Head from "next/head";
 import Script from "next/script";
 import Link from "next/link";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { theme } from "@chakra-ui/pro-theme";
 
 /**
  * List pages you want to be publicly accessible, or leave empty if
@@ -19,42 +19,27 @@ const publicPages = ["/", "/sign-in/[[...index]]", "/sign-up/[[...index]]"];
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
+  const myTheme = extendTheme(
+    {
+      colors: { ...theme.colors, brand: theme.colors.purple },
+    },
+    theme
+  );
 
   /**
    * If the current route is listed as public, render it directly.
    * Otherwise, use Clerk to require authentication.
    */
   return (
-    <ChakraProvider>
-      <ClerkProvider {...pageProps}>
-        <Head>
-          <link href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.css" rel="stylesheet" />
-        </Head>
-        <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
-        <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
-        <Layout>
-          {publicPages.includes(router.pathname) ? (
-            <Component {...pageProps} />
-          ) : (
-            <>
-              <SignedIn>
-                <Component {...pageProps} />
-              </SignedIn>
-              <SignedOut>
-                <main>
-                  <p>
-                    Please{" "}
-                    <Link href="/sign-in">
-                      <a>sign in</a>
-                    </Link>{" "}
-                    to access this page.
-                  </p>
-                </main>
-              </SignedOut>
-            </>
-          )}
-        </Layout>
-      </ClerkProvider>
+    <ChakraProvider theme={myTheme}>
+      <Head>
+        <link href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism.css" rel="stylesheet" />
+      </Head>
+      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-core.min.js" />
+      <Script src="https://cdn.jsdelivr.net/npm/prismjs@1/plugins/autoloader/prism-autoloader.min.js" />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ChakraProvider>
   );
 };
